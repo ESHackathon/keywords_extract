@@ -41,28 +41,7 @@ with open(path_stage2, 'w') as f:
 
 # In[]:
 
-path_stage1 = "o1.json"
 path_stage2 = "o2.json"
-path_stage3 = "o3.json"
-
-kernel = pytextrank.rank_kernel(path_stage2)
-
-with open(path_stage3, 'w') as f:
-    for s in pytextrank.top_sentences(kernel, path_stage1):
-        f.write(pytextrank.pretty_print(s._asdict()))
-        f.write("\n")
-
-# In[]:
-
-path_stage2 = "o2.json"
-path_stage3 = "o3.json"
-
 phrases = "\n".join(set([p for p in pytextrank.limit_keyphrases(path_stage2, phrase_limit=10)]))
-sent_iter = sorted(pytextrank.limit_sentences(path_stage3, word_limit=150), key=lambda x: x[1])
-s = []
 
-for sent_text, idx in sent_iter:
-    s.append(pytextrank.make_sentence(sent_text))
-
-graf_text = " ".join(s)
 print 'keywords:\n' + phrases
