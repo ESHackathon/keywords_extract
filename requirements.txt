@@ -1,3 +1,4 @@
 nltk
 rake_nltk
 networkx
+flask_cors
