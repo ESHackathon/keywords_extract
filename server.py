@@ -13,9 +13,15 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
+def to_unicode(text):
+    if type(text) == unicode:
+        return text
+    return text.decode("utf-8")
+
 @app.route("/keyword-extraction", methods=['POST'])
 def keyword_extraction():
-    query = request.get_data()
+
+    query = to_unicode(request.get_data())
     response = app.response_class(
         response=json.dumps(calculate_keywords(query)),
         status=200,
